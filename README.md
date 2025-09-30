@@ -18,8 +18,13 @@ Features:
 Tech Stack:
 
 Backend: Django, Django REST Framework (DRF)
+
 Frontend: React.js
+
 Database: PostgreSQL
+
 AI Integration: OpenAI GPT API for generating learning plans
+
 Authentication: JWT (JSON Web Tokens)
+
 Deployment: Docker (optional: AWS/GCP/Heroku)
