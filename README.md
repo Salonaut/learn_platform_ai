@@ -27,4 +27,3 @@ AI Integration: OpenAI GPT API for generating learning plans
 
 Authentication: JWT (JSON Web Tokens)
 
-Deployment: Docker (optional: AWS/GCP/Heroku)
