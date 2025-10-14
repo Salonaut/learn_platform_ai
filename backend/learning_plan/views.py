@@ -1,9 +1,11 @@
+from django.utils import timezone
+
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, GenericAPIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
 
-from .models import LearningPlan, Lesson
+from .models import LearningPlan, Lesson, UserProgress
 from .serializers import LearningPlanSerializer, LessonItemSerializer, LessonDetailSerializer
 from .services import generate_learning_plan
 
@@ -22,7 +24,7 @@ class LessonListView(ListAPIView):
 
     def get_queryset(self):
         plan_id = self.kwargs.get('pk')
-        return Lesson.objects.filter(id=plan_id)
+        return Lesson.objects.filter(plan_id=plan_id)
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -75,3 +77,45 @@ class LearningPlanGenerateView(APIView):
         return Response({
             "message": "Learning plan was successfully created. ", "plan_id": learning_plan.id
         }, status=status.HTTP_201_CREATED)
+
+
+class LessonCompleteView(GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, lesson_id):
+        try:
+            lesson = Lesson.objects.get(pk=lesson_id, plan__user=request.user)
+        except Lesson.DoesNotExist:
+            return Response({
+                "detail": "Lesson not found. "
+            }, status=status.HTTP_404_NOT_FOUND)
+
+
+        progress, created = UserProgress.objects.get_or_create(
+            user=request.user,
+            lesson=lesson
+        )
+
+        progress.is_completed = not progress.is_completed
+        progress.completed_at = timezone.now() if progress.is_completed else None
+        progress.save()
+
+        lesson.plan.calculate_progress()
+
+
+        return Response({
+            'lesson_id': lesson.id,
+            'is_completed': progress.is_completed,
+            'progress': lesson.plan.progress
+        }, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
+
+
