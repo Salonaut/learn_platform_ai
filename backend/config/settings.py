@@ -31,11 +31,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'drf_spectacular',
     'users',
-    'learning_plan'
+    'learning_plan',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -144,8 +148,11 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.FormParser',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # JWT Conf
 from datetime import timedelta
@@ -162,4 +169,11 @@ SIMPLE_JWT = {
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Learn Platform AI API',
+    'DESCRIPTION': 'Документація для API навчальної платформи, яка використовує ШІ для генерації персоналізованих навчальних планів.',
+    'VERSION': '1.0.0',
 }
