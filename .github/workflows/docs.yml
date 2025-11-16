@@ -45,6 +45,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
           
+      - name: Ensure docs directory exists
+        run: |
+          # Create docs folder so Doxygen can write ../docs/backend from backend working dir
+          mkdir -p docs/backend
+          ls -la docs || true
+        
       - name: Generate Backend Documentation (Doxygen)
         working-directory: backend
         run: |
