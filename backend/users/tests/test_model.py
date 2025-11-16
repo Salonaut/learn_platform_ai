@@ -1,33 +1,58 @@
-from django.test import SimpleTestCase
-from unittest.mock import MagicMock
+from django.test import TestCase
+from parameterized import parameterized
+
 from users.models import User
+from users.tests.factories import UserFactory
 
-class TestUserModel(SimpleTestCase):
 
-    def test_full_name_property(self):
-        user_mock = MagicMock(spec=User)
-        user_mock.first_name = "Іван"
-        user_mock.last_name = "Петренко"
+class TestUserModel(TestCase):
+    """Test User model behavior with real instances."""
 
-        full_name = User.full_name.fget(user_mock)
+    @classmethod
+    def setUpTestData(cls):
+        """Create shared test data once for all test methods."""
+        cls.user = UserFactory(
+            first_name="Іван",
+            last_name="Петренко",
+            email="ivan@example.com"
+        )
 
-        self.assertEqual(full_name, "Іван Петренко")
+    @parameterized.expand([
+        ("Іван", "Петренко", "Іван Петренко"),
+        ("Марія", "", "Марія"),
+        ("", "Шевченко", "Шевченко"),
+        ("", "", ""),
+        ("  Петро  ", "  Коваль  ", "Петро    Коваль"),
+        ("Single", None, "Single"),
+        (None, "LastOnly", "LastOnly"),
+        (None, None, ""),
+    ])
+    def test_full_name_property(self, first_name, last_name, expected):
+        """Test full_name property with various input combinations."""
+        user = User(first_name=first_name or "", last_name=last_name or "")
+        self.assertEqual(user.full_name, expected)
 
-    def test_full_name_property_only_first_name(self):
-        user_mock = MagicMock(spec=User)
-        user_mock.first_name = "Марія"
-        user_mock.last_name = ""
+    def test_full_name_on_real_user(self):
+        """Test full_name on an actual saved user instance."""
+        self.assertEqual(self.user.full_name, "Іван Петренко")
 
-        full_name = User.full_name.fget(user_mock)
+    def test_str_representation(self):
+        """Test __str__ method returns email."""
+        self.assertEqual(str(self.user), "ivan@example.com")
 
-        self.assertEqual(full_name, "Марія")
+    def test_username_field_is_email(self):
+        """Verify USERNAME_FIELD is set to email for authentication."""
+        self.assertEqual(User.USERNAME_FIELD, 'email')
 
-    def test_full_name_property_empty(self):
-        user_mock = MagicMock(spec=User)
-        user_mock.first_name = ""
-        user_mock.last_name = ""
+    def test_user_creation_with_factory(self):
+        """Test user creation using factory."""
+        user = UserFactory()
+        self.assertIsNotNone(user.id)
+        self.assertTrue(user.email)
+        self.assertTrue(user.check_password('defaultPassword123!'))
 
-        full_name = User.full_name.fget(user_mock)
-
-        self.assertEqual(full_name, "")
+    def test_user_active_by_default(self):
+        """Test that users are active by default."""
+        user = UserFactory()
+        self.assertTrue(user.is_active)
 
