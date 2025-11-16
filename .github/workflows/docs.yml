@@ -1,0 +1,203 @@
+name: Generate and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+      - docs/**
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package.json
+          
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+          
+      - name: Generate Backend Documentation (Doxygen)
+        working-directory: backend
+        run: |
+          doxygen Doxyfile
+          
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+        
+      - name: Install JSDoc and template
+        working-directory: frontend
+        run: |
+          npm install --save-dev jsdoc docdash
+          
+      - name: Generate Frontend Documentation (JSDoc)
+        working-directory: frontend
+        run: |
+          npx jsdoc -c jsdoc.json
+          
+      - name: Create documentation index page
+        run: |
+          mkdir -p docs
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Learning Platform AI - Documentation</title>
+              <style>
+                  * {
+                      margin: 0;
+                      padding: 0;
+                      box-sizing: border-box;
+                  }
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      min-height: 100vh;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      padding: 20px;
+                  }
+                  .container {
+                      max-width: 800px;
+                      background: white;
+                      border-radius: 20px;
+                      padding: 60px 40px;
+                      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                      text-align: center;
+                  }
+                  h1 {
+                      font-size: 2.5em;
+                      color: #333;
+                      margin-bottom: 15px;
+                  }
+                  .subtitle {
+                      font-size: 1.2em;
+                      color: #666;
+                      margin-bottom: 50px;
+                  }
+                  .docs-grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                      gap: 30px;
+                      margin-top: 40px;
+                  }
+                  .doc-card {
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      padding: 40px 30px;
+                      border-radius: 15px;
+                      text-decoration: none;
+                      color: white;
+                      transition: transform 0.3s, box-shadow 0.3s;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      gap: 15px;
+                  }
+                  .doc-card:hover {
+                      transform: translateY(-10px);
+                      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+                  }
+                  .doc-card h2 {
+                      font-size: 1.8em;
+                      margin-bottom: 10px;
+                  }
+                  .doc-card p {
+                      font-size: 1em;
+                      opacity: 0.9;
+                  }
+                  .icon {
+                      font-size: 3em;
+                      margin-bottom: 10px;
+                  }
+                  .footer {
+                      margin-top: 50px;
+                      color: #999;
+                      font-size: 0.9em;
+                  }
+                  .footer a {
+                      color: #667eea;
+                      text-decoration: none;
+                  }
+                  .footer a:hover {
+                      text-decoration: underline;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🎓 Learning Platform AI</h1>
+                  <p class="subtitle">Project Documentation</p>
+                  
+                  <div class="docs-grid">
+                      <a href="backend/html/index.html" class="doc-card">
+                          <div class="icon">🐍</div>
+                          <h2>Backend</h2>
+                          <p>Python Django REST API documentation generated with Doxygen</p>
+                      </a>
+                      
+                      <a href="frontend/index.html" class="doc-card">
+                          <div class="icon">⚛️</div>
+                          <h2>Frontend</h2>
+                          <p>React.js application documentation generated with JSDoc</p>
+                      </a>
+                  </div>
+                  
+                  <div class="footer">
+                      <p>Generated automatically with GitHub Actions</p>
+                      <p><a href="https://github.com/Salonaut/learn_platform_ai" target="_blank">View on GitHub</a></p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-docs
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/docs/')
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

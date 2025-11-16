@@ -1,8 +1,25 @@
+/**
+ * @file AuthContext.jsx
+ * @brief Authentication context provider for the application.
+ * 
+ * @details Manages user authentication state, login, registration, and logout
+ * functionality using React Context API and localStorage for persistence.
+ */
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../api';
 
 const AuthContext = createContext(null);
 
+/**
+ * @brief Custom hook to access authentication context.
+ * 
+ * @return {Object} Authentication context value
+ * @throws {Error} If used outside of AuthProvider
+ * 
+ * @example
+ * const { user, login, logout } = useAuth();
+ */
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -11,6 +28,20 @@ export const useAuth = () => {
   return context;
 };
 
+/**
+ * @brief Authentication provider component.
+ * 
+ * @details Wraps the application to provide authentication context to all children.
+ * Manages user state, authentication tokens, and provides login/logout functionality.
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode} props.children - Child components
+ * 
+ * @example
+ * <AuthProvider>
+ *   <App />
+ * </AuthProvider>
+ */
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,6 +57,14 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
+  /**
+   * @brief Authenticate user with email and password.
+   * 
+   * @param {string} email - User's email address
+   * @param {string} password - User's password
+   * 
+   * @return {Promise<Object>} Object with success status and optional error message
+   */
   const login = async (email, password) => {
     try {
       const response = await authAPI.login({ email, password });
@@ -45,6 +84,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  /**
+   * @brief Register a new user account.
+   * 
+   * @param {Object} data - Registration data including email, password, username
+   * 
+   * @return {Promise<Object>} Object with success status and optional error message
+   */
   const register = async (data) => {
     try {
       const response = await authAPI.register(data);
@@ -64,6 +110,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  /**
+   * @brief Log out the current user.
+   * 
+   * @details Clears authentication tokens from localStorage and resets user state.
+   * Calls the logout API endpoint to invalidate the refresh token.
+   */
   const logout = async () => {
     try {
       const refreshToken = localStorage.getItem('refresh_token');
