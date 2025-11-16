@@ -50,6 +50,13 @@ jobs:
           # Create docs folder so Doxygen can write ../docs/backend from backend working dir
           mkdir -p docs/backend
           ls -la docs || true
+
+      - name: Make Doxygen OUTPUT_DIRECTORY absolute
+        run: |
+          # Replace OUTPUT_DIRECTORY in backend/Doxyfile with an absolute path to avoid relative path issues
+          echo "Setting OUTPUT_DIRECTORY in backend/Doxyfile to $GITHUB_WORKSPACE/docs/backend"
+          sed -i "s|^OUTPUT_DIRECTORY.*|OUTPUT_DIRECTORY = $GITHUB_WORKSPACE/docs/backend|" backend/Doxyfile
+          grep -n "OUTPUT_DIRECTORY" backend/Doxyfile || true
         
       - name: Generate Backend Documentation (Doxygen)
         working-directory: backend
