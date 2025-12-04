@@ -12,7 +12,11 @@ from openai import OpenAI
 import json
 import re
 
-client = OpenAI(api_key=settings.OPEN_API_KEY)
+# Initialize OpenAI client only if API key is available
+try:
+    client = OpenAI(api_key=settings.OPEN_API_KEY) if settings.OPEN_API_KEY else None
+except Exception:
+    client = None
 
 
 
@@ -74,10 +78,73 @@ def generate_learning_plan(topic, level, daily_hours):
     text = re.sub(r"```$", "", text)
     text = text.strip()
 
-
-    try:
-        plan_data = json.loads(text)
-    except json.JSONDecodeError as e:
-        raise e
-
+    plan_data = json.loads(text)
     return plan_data
+
+
+def generate_quiz_questions(lesson_theory, lesson_title, num_questions=5):
+    """
+    @brief Generate quiz questions from lesson theory using AI.
+    
+    @details Uses OpenAI GPT to analyze lesson content and create
+    multiple-choice questions with explanations for testing understanding.
+    
+    @param lesson_theory The lesson's theory content in Markdown (string)
+    @param lesson_title Title of the lesson (string)
+    @param num_questions Number of questions to generate (int, default=5)
+    
+    @return List of dictionaries containing question data, or None on failure
+    
+    @throws json.JSONDecodeError if AI response is not valid JSON
+    
+    @example
+    questions = generate_quiz_questions(
+        "# Python Basics\\n\\nVariables store data...",
+        "Introduction to Python",
+        5
+    )
+    for q in questions:
+        print(f"Q: {q['question']}")
+    """
+    prompt = f"""
+    На основі наступної теорії уроку "{lesson_title}" створи {num_questions} тестових питань
+    для перевірки розуміння матеріалу.
+    
+    Теорія:
+    {lesson_theory[:3000]}
+    
+    Кожне питання має містити:
+    - Текст питання
+    - 4 варіанти відповіді (A, B, C, D)
+    - Правильну відповідь (A/B/C/D)
+    - Коротке пояснення чому це правильна відповідь
+    
+    Відповідь **тільки у форматі JSON**, без пояснень.
+    Формат:
+    [
+      {{
+        "question": string,
+        "option_a": string,
+        "option_b": string,
+        "option_c": string,
+        "option_d": string,
+        "correct_answer": string (A/B/C/D),
+        "explanation": string
+      }}
+    ]
+    """
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    text = response.output_text.strip()
+
+    # clean ```json ... ```
+    text = re.sub(r"^```(?:json)?", "", text)
+    text = re.sub(r"```$", "", text)
+    text = text.strip()
+
+    questions_data = json.loads(text)
+    return questions_data
