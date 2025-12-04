@@ -72,7 +72,7 @@ class ProfileView(generics.RetrieveUpdateAPIView):
 
 
 
-class ChangePasswordView(generics.UpdateAPIView):
+class ChangePasswordView(generics.GenericAPIView):
     serializer_class = UserChangePasswordSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -81,13 +81,13 @@ class ChangePasswordView(generics.UpdateAPIView):
         return self.request.user
 
 
-    def update(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
         return Response({
-            'message': 'Password change successfully'
+            'message': 'Password changed successfully'
         }, status=status.HTTP_200_OK)
 
 

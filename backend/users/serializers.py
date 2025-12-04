@@ -7,6 +7,7 @@ from .models import User
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
     password_confirm = serializers.CharField(write_only=True)
+    username = serializers.CharField(required=False)  # Make username optional
 
 
     class Meta:
@@ -19,8 +20,21 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if attrs['password'] != attrs['password_confirm']:
             raise serializers.ValidationError(
-                {"password": "Password field don't match"}
+                {"password": "Password fields don't match"}
             )
+        
+        # Auto-generate username from email if not provided
+        if not attrs.get('username'):
+            email = attrs.get('email', '')
+            attrs['username'] = email.split('@')[0]
+            
+            # Ensure unique username
+            base_username = attrs['username']
+            counter = 1
+            while User.objects.filter(username=attrs['username']).exists():
+                attrs['username'] = f"{base_username}{counter}"
+                counter += 1
+        
         return attrs
 
     def create(self, validated_data):
