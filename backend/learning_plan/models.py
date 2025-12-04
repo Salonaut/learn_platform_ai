@@ -130,3 +130,126 @@ class UserProgress(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_completed = models.BooleanField(default=False)
     completed_at = models.DateTimeField(null=True, blank=True)
+    time_spent = models.IntegerField(default=0, help_text="Time spent in minutes")
+
+
+class Quiz(models.Model):
+    """
+    @brief Model representing an AI-generated quiz for a lesson.
+    
+    @details Contains quiz metadata and questions generated from lesson theory.
+    Each quiz is linked to a specific lesson and tracks completion status.
+    
+    @see Lesson
+    @see QuizQuestion
+    """
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='quizzes')
+    title = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Quiz: {self.title}"
+    
+    class Meta:
+        verbose_name_plural = "Quizzes"
+
+
+class QuizQuestion(models.Model):
+    """
+    @brief Model representing a single question in a quiz.
+    
+    @details Stores question text, multiple choice options, correct answer,
+    and optional explanation. Supports multiple choice format.
+    
+    @see Quiz
+    """
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
+    question_text = models.TextField()
+    option_a = models.CharField(max_length=500)
+    option_b = models.CharField(max_length=500)
+    option_c = models.CharField(max_length=500)
+    option_d = models.CharField(max_length=500)
+    correct_answer = models.CharField(max_length=1, choices=[
+        ('A', 'Option A'),
+        ('B', 'Option B'),
+        ('C', 'Option C'),
+        ('D', 'Option D'),
+    ])
+    explanation = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.question_text[:50]
+
+
+class QuizAttempt(models.Model):
+    """
+    @brief Model tracking user quiz attempts and scores.
+    
+    @details Records when a user takes a quiz, their score, and answers.
+    Allows multiple attempts per quiz.
+    
+    @see Quiz
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='attempts')
+    score = models.FloatField(help_text="Percentage score")
+    answers = models.JSONField(default=dict, help_text="User answers: {question_id: answer}")
+    completed_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user.email} - {self.quiz.title} - {self.score}%"
+    
+    class Meta:
+        ordering = ['-completed_at']
+
+
+class LessonNote(models.Model):
+    """
+    @brief Model for user-created notes on lessons.
+    
+    @details Allows users to add personal notes and annotations to lessons
+    for better understanding and future reference.
+    
+    @see Lesson
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='notes')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"Note by {self.user.email} on {self.lesson.title}"
+    
+    class Meta:
+        ordering = ['-created_at']
+
+
+class StudyStreak(models.Model):
+    """
+    @brief Model tracking daily study activity for streak calculation.
+    
+    @details Records each day a user completes any learning activity
+    (lesson completion, quiz, notes). Used to calculate study streaks
+    and generate activity heatmap.
+    
+    @see UserProgress
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='study_streaks')
+    date = models.DateField()
+    lessons_completed = models.IntegerField(default=0)
+    quizzes_taken = models.IntegerField(default=0)
+    notes_created = models.IntegerField(default=0)
+    total_time_spent = models.IntegerField(default=0, help_text="Minutes")
+    
+    class Meta:
+        unique_together = ['user', 'date']
+        ordering = ['-date']
+    
+    def __str__(self):
+        return f"{self.user.email} - {self.date}"
+    
+    @property
+    def activity_score(self):
+        """Calculate activity score for heatmap intensity."""
+        return (self.lessons_completed * 3) + (self.quizzes_taken * 2) + self.notes_created
