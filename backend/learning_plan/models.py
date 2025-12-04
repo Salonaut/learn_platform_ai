@@ -1,8 +1,25 @@
+"""
+@file models.py
+@brief Models for learning plan management system.
+
+This module contains Django models for managing learning plans, lessons, and user progress.
+"""
+
 from django.db import models
 from django.conf import settings
 
 
 class LearningPlan(models.Model):
+    """
+    @brief Main model representing a personalized learning plan for a user.
+    
+    @details LearningPlan stores information about a user's learning journey,
+    including the topic, knowledge level, time commitment, and overall progress.
+    Each plan contains multiple lessons and tracks completion status.
+    
+    @see Lesson
+    @see UserProgress
+    """
     KNOWLEDGE_LEVEL_CHOICES = [
         ('beginner', "Beginner"),
         ('intermediate', 'Intermediate'),
@@ -21,10 +38,27 @@ class LearningPlan(models.Model):
 
 
     def __str__(self):
+        """
+        @brief String representation of the learning plan.
+        @return The topic name of the learning plan.
+        """
         return self.topic
 
-    # after view for update make this automatically by update everytime when user finish lesson
     def calculate_progress(self):
+        """
+        @brief Calculate and update the completion progress for this learning plan.
+        
+        @details This method calculates the percentage of completed lessons
+        by comparing completed lessons to total lessons. Updates the progress
+        field and saves the model.
+        
+        @return Progress percentage as a float (0.0 to 100.0).
+        
+        @example
+        plan = LearningPlan.objects.get(id=1)
+        current_progress = plan.calculate_progress()
+        print(f"Progress: {current_progress}%")
+        """
         total_lessons = self.items.count()
         if total_lessons == 0:
             return 0.0
@@ -44,6 +78,15 @@ class LearningPlan(models.Model):
 
 
 class Lesson(models.Model):
+    """
+    @brief Model representing a single lesson within a learning plan.
+    
+    @details Each lesson contains educational content in Markdown format,
+    associated tasks, time estimates, and type classification (theory,
+    practice, quiz, or project).
+    
+    @see LearningPlan
+    """
     ITEM_TYPE_CHOICES = [
         ('theory', 'Theory'),
         ('practice', 'Practice'),
@@ -64,12 +107,25 @@ class Lesson(models.Model):
 
 
     def __str__(self):
+        """
+        @brief String representation of the lesson.
+        @return The title of the lesson.
+        """
         return self.title
 
 
 
 
 class UserProgress(models.Model):
+    """
+    @brief Model tracking individual user progress for specific lessons.
+    
+    @details UserProgress records whether a user has completed a lesson
+    and when it was completed. Used to calculate overall learning plan progress.
+    
+    @see LearningPlan
+    @see Lesson
+    """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_completed = models.BooleanField(default=False)

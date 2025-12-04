@@ -1,7 +1,21 @@
+/**
+ * @file apiClient.js
+ * @brief Axios HTTP client with JWT authentication and token refresh.
+ * 
+ * @details Configures axios instance with automatic JWT token injection,
+ * token refresh on 401 errors, and request/response interceptors.
+ */
+
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8000/api/v1';
 
+/**
+ * @brief Configured axios instance for API requests.
+ * 
+ * @details Includes request interceptor for adding JWT tokens and
+ * response interceptor for automatic token refresh on expiration.
+ */
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
