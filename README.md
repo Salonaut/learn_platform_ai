@@ -27,3 +27,39 @@ AI Integration: OpenAI GPT API for generating learning plans
 
 Authentication: JWT (JSON Web Tokens)
 
+
+## Documentation
+
+This project uses automated documentation generation for both backend and frontend code:
+
+### Backend Documentation (Python)
+- **Tool**: Doxygen with Python support
+- **Format**: Doxygen-style comments with `@brief`, `@param`, `@return`, `@throws`, `@example` tags
+- **Coverage**: Models, views, serializers, and services
+
+### Frontend Documentation (JavaScript)
+- **Tool**: JSDoc
+- **Format**: JSDoc comments with standard tags
+- **Coverage**: React components, context providers, API clients
+
+### Viewing Documentation
+The documentation is automatically generated and published to GitHub Pages on every push to the main branch.
+
+**Live Documentation**: https://salonaut.github.io/learn_platform_ai/
+
+### Local Documentation Generation
+
+#### Backend (Doxygen)
+```bash
+cd backend
+doxygen Doxyfile
+# Open docs/backend/html/index.html in your browser
+```
+
+#### Frontend (JSDoc)
+```bash
+cd frontend
+npm run docs
+# Open docs/frontend/index.html in your browser
+```
+

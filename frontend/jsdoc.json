@@ -1,0 +1,46 @@
+{
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.(jsx?|js)$",
+    "excludePattern": "(node_modules/|docs/|dist/|build/)"
+  },
+  "opts": {
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
+    "destination": "../docs/frontend/",
+    "recurse": true,
+    "verbose": true,
+    "readme": "README.md"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    }
+  },
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true,
+    "collapse": true,
+    "typedefs": true,
+    "removeQuotes": "none",
+    "scripts": [],
+    "menu": {
+      "GitHub Repository": {
+        "href": "https://github.com/Salonaut/learn_platform_ai",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "repository"
+      }
+    }
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": false
+  }
+}
