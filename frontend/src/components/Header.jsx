@@ -63,6 +63,12 @@ const Header = () => {
             <Button color="inherit" onClick={() => navigate('/plans/create')}>
               Створити план
             </Button>
+            <Button color="inherit" onClick={() => navigate('/analytics')}>
+              Аналітика
+            </Button>
+            <Button color="inherit" onClick={() => navigate('/streak')}>
+              Streak
+            </Button>
             <IconButton
               size="large"
               aria-label="account of current user"

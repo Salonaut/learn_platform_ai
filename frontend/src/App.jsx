@@ -17,6 +17,9 @@ import PlansListPage from './pages/PlansListPage';
 import CreatePlanPage from './pages/CreatePlanPage';
 import LessonsListPage from './pages/LessonsListPage';
 import LessonDetailPage from './pages/LessonDetailPage';
+import QuizPage from './pages/QuizPage';
+import AnalyticsPage from './pages/AnalyticsPage';
+import StreakPage from './pages/StreakPage';
 
 const theme = createTheme({
   palette: {
@@ -92,6 +95,30 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <LessonDetailPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/quiz/:lessonId"
+                element={
+                  <ProtectedRoute>
+                    <QuizPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/analytics"
+                element={
+                  <ProtectedRoute>
+                    <AnalyticsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/streak"
+                element={
+                  <ProtectedRoute>
+                    <StreakPage />
                   </ProtectedRoute>
                 }
               />
