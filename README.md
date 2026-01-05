@@ -1,178 +1,178 @@
-# 🎓 AI-Powered Learning Platform
+# AI-Powered Learning Platform
 
-Інтелектуальна платформа для навчання, яка допомагає користувачам ефективно вивчати будь-яку тему за допомогою структурованих навчальних планів, згенерованих штучним інтелектом, з відстеженням прогресу та інтерактивними елементами.
-
----
-
-## 📋 Зміст
-- [Огляд проєкту](#-огляд-проєкту)
-- [Основні функції](#-основні-функції)
-- [Технологічний стек](#-технологічний-стек)
-- [Архітектура системи](#-архітектура-системи)
-- [API Endpoints](#-api-endpoints)
-- [Моделі даних](#-моделі-даних)
-- [Встановлення та налаштування](#-встановлення-та-налаштування)
-- [Документація](#-документація)
+An intelligent learning platform that helps users efficiently master any topic through structured, AI-generated study plans with progress tracking and interactive elements.
 
 ---
 
-## 🌟 Огляд проєкту
-
-**Learn Platform AI** — це сучасна веб-платформа, яка використовує можливості OpenAI GPT для створення персоналізованих навчальних планів. Система аналізує рівень знань користувача, його часові можливості та генерує структуровані уроки з теорією, практичними завданнями, тестами та проєктами.
-
-### Ключові переваги:
-- ✅ **Персоналізація**: AI-генерація планів відповідно до рівня знань (beginner/intermediate/experienced)
-- 📊 **Аналітика**: Відстеження прогресу, часу навчання та статистики
-- 🔥 **Геймифікація**: Система стріків (study streaks) для мотивації
-- 📝 **Інтерактивність**: Конспекти, тести з AI-генерованими питаннями
-- 🎯 **Адаптивність**: Різні типи уроків (теорія, практика, квіз, проєкт)
-
----
-
-## 🚀 Основні функції
-
-### 1. **Управління навчальними планами**
-- Генерація персоналізованих планів навчання за допомогою OpenAI GPT
-- Вказання теми, рівня знань (beginner/intermediate/experienced) та часу на навчання
-- Автоматичний розрахунок прогресу виконання плану
-- Перегляд списку всіх навчальних планів користувача
-
-### 2. **Система уроків**
-- **Типи уроків**: теорія, практика, тести, проєкти
-- Детальний контент у форматі Markdown з теорією
-- Практичні завдання для кожного уроку
-- Оцінка часу на виконання
-- Нумерація уроків за днями навчання
-- Додаткові посилання для поглибленого вивчення
-
-### 3. **Інтелектуальна система тестування**
-- AI-генерація тестів на основі теорії уроку
-- Питання з множинним вибором (A, B, C, D)
-- Автоматична перевірка відповідей
-- Детальні пояснення до правильних відповідей
-- Історія спроб проходження тестів
-- Підрахунок балів у відсотках
-
-### 4. **Відстеження прогресу**
-- Позначення уроків як виконаних
-- Відстеження часу, витраченого на кожен урок
-- Дата завершення уроків
-- Автоматичний перерахунок прогресу навчального плану
-- Детальна аналітика з метриками:
-  - Загальний прогрес (%)
-  - Витрачений час
-  - Кількість завершених уроків/тестів
-  - Середній бал тестів
-
-### 5. **Система конспектів**
-- Створення особистих нотаток до уроків
-- Редагування та видалення конспектів
-- Збереження часу створення/оновлення
-- Прив'язка до конкретного уроку
-
-### 6. **Study Streaks (Стріки навчання)**
-- Відстеження щоденної активності
-- Підрахунок кількості днів безперервного навчання
-- Heatmap активності за останні 365 днів
-- Метрики: уроки, тести, конспекти, час навчання
-- Система балів активності для візуалізації
-
-### 7. **Аналітика та статистика**
-- Загальний прогрес по всіх планах
-- Витрачений час на навчання
-- Статистика по урокам та тестам
-- Успішність проходження тестів
-- Візуалізація даних
-
-### 8. **Система користувачів**
-- Реєстрація та автентифікація через JWT
-- Профіль користувача з аватаром
-- Біографія та соціальні мережі
-- Зміна паролю
-- Автоматичне оновлення токенів
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [System Architecture](#system-architecture)
+- [API Endpoints](#api-endpoints)
+- [Data Models](#data-models)
+- [Installation and Setup](#installation-and-setup)
+- [Documentation](#documentation)
 
 ---
 
-## 💻 Технологічний стек
+## Project Overview
 
-### **Backend**
-| Технологія | Версія | Призначення |
+**Learn Platform AI** is a modern web platform that leverages OpenAI GPT capabilities to create personalized learning plans. The system analyzes user's knowledge level, time availability and generates structured lessons with theory, practical tasks, quizzes, and projects.
+
+### Key Advantages:
+- **Personalization**: AI-generated plans tailored to knowledge level (beginner/intermediate/experienced)
+- **Analytics**: Progress tracking, learning time monitoring and statistics
+- **Gamification**: Study streaks system for motivation
+- **Interactivity**: Notes, quizzes with AI-generated questions
+- **Adaptability**: Different lesson types (theory, practice, quiz, project)
+
+---
+
+## Key Features
+
+### 1. Learning Plan Management
+- Generation of personalized learning plans using OpenAI GPT
+- Specify topic, knowledge level (beginner/intermediate/experienced) and time commitment
+- Automatic progress calculation
+- View list of all user's learning plans
+
+### 2. Lesson System
+- **Lesson types**: theory, practice, quizzes, projects
+- Detailed content in Markdown format with theory
+- Practical tasks for each lesson
+- Time estimates for completion
+- Lessons numbered by study day
+- Additional links for deeper study
+
+### 3. Intelligent Quiz System
+- AI-generated quizzes based on lesson theory
+- Multiple choice questions (A, B, C, D)
+- Automatic answer verification
+- Detailed explanations for correct answers
+- Quiz attempt history
+- Percentage score calculation
+
+### 4. Progress Tracking
+- Mark lessons as completed
+- Track time spent on each lesson
+- Lesson completion dates
+- Automatic learning plan progress recalculation
+- Detailed analytics with metrics:
+  - Overall progress (%)
+  - Time spent
+  - Number of completed lessons/quizzes
+  - Average quiz scores
+
+### 5. Notes System
+- Create personal notes for lessons
+- Edit and delete notes
+- Timestamps for creation/updates
+- Link notes to specific lessons
+
+### 6. Study Streaks
+- Track daily learning activity
+- Calculate consecutive learning days
+- Activity heatmap for last 365 days
+- Metrics: lessons, quizzes, notes, learning time
+- Activity score system for visualization
+
+### 7. Analytics and Statistics
+- Overall progress across all plans
+- Total learning time
+- Lesson and quiz statistics
+- Quiz success rates
+- Data visualization
+
+### 8. User System
+- Registration and JWT authentication
+- User profile with avatar
+- Biography and social media links
+- Password change
+- Automatic token refresh
+
+---
+
+## Technology Stack
+
+### Backend
+| Technology | Version | Purpose |
 |-----------|---------|------------|
-| **Python** | 3.10+ | Основна мова програмування |
+| **Python** | 3.10+ | Core programming language |
 | **Django** | 5.0+ | Web framework |
 | **Django REST Framework** | 3.14+ | REST API |
-| **PostgreSQL** | 14+ | Реляційна база даних |
-| **JWT (SimpleJWT)** | 5.3+ | Автентифікація |
-| **OpenAI API** | 1.0+ | AI-генерація контенту |
-| **Pillow** | 10.0+ | Обробка зображень (аватари) |
+| **PostgreSQL** | 14+ | Relational database |
+| **JWT (SimpleJWT)** | 5.3+ | Authentication |
+| **OpenAI API** | 1.0+ | AI content generation |
+| **Pillow** | 10.0+ | Image processing (avatars) |
 
-**Додаткові пакети:**
-- `drf-spectacular` — автоматична генерація OpenAPI документації
-- `django-cors-headers` — підтримка CORS
-- `python-dotenv` — управління змінними оточення
-- `psycopg2-binary` — PostgreSQL драйвер
+**Additional packages:**
+- `drf-spectacular` - automatic OpenAPI documentation generation
+- `django-cors-headers` - CORS support
+- `python-dotenv` - environment variables management
+- `psycopg2-binary` - PostgreSQL driver
 
-### **Frontend**
-| Технологія | Версія | Призначення |
+### Frontend
+| Technology | Version | Purpose |
 |-----------|---------|------------|
-| **React** | 18.2+ | UI бібліотека |
-| **Vite** | 5.0+ | Build tool та dev server |
-| **React Router** | 6.20+ | Маршрутизація |
-| **Axios** | 1.6+ | HTTP клієнт |
-| **Material-UI (MUI)** | 5.14+ | UI компоненти |
-| **React Markdown** | 9.0+ | Рендеринг Markdown |
+| **React** | 18.2+ | UI library |
+| **Vite** | 5.0+ | Build tool and dev server |
+| **React Router** | 6.20+ | Routing |
+| **Axios** | 1.6+ | HTTP client |
+| **Material-UI (MUI)** | 5.14+ | UI components |
+| **React Markdown** | 9.0+ | Markdown rendering |
 | **Emotion** | 11.11+ | CSS-in-JS |
 
-### **Інструменти розробки**
-- **Doxygen** — генерація документації для Python (backend)
-- **JSDoc** — генерація документації для JavaScript (frontend)
-- **GitHub Pages** — хостинг документації
-- **Git** — контроль версій
+### Development Tools
+- **Doxygen** - documentation generation for Python (backend)
+- **JSDoc** - documentation generation for JavaScript (frontend)
+- **GitHub Pages** - documentation hosting
+- **Git** - version control
 
 ---
 
-## 🏗️ Архітектура системи
+## System Architecture
 
-### Структура проєкту
+### Project Structure
 
 ```
 learn_platform_ai/
 ├── backend/                    # Django backend
-│   ├── config/                # Налаштування Django
-│   │   ├── settings.py       # Конфігурація (DB, JWT, CORS, DRF)
-│   │   ├── urls.py           # Головний роутинг
-│   │   └── wsgi.py / asgi.py # WSGI/ASGI входові точки
-│   ├── learning_plan/         # Додаток навчальних планів
-│   │   ├── models.py         # Моделі (LearningPlan, Lesson, Quiz, etc.)
-│   │   ├── serializers.py    # DRF серіалізатори
+│   ├── config/                # Django configuration
+│   │   ├── settings.py       # Configuration (DB, JWT, CORS, DRF)
+│   │   ├── urls.py           # Main routing
+│   │   └── wsgi.py / asgi.py # WSGI/ASGI entry points
+│   ├── learning_plan/         # Learning plans app
+│   │   ├── models.py         # Models (LearningPlan, Lesson, Quiz, etc.)
+│   │   ├── serializers.py    # DRF serializers
 │   │   ├── views.py          # API views
-│   │   ├── services.py       # Бізнес-логіка (AI-генерація)
-│   │   ├── urls.py           # URL маршрути
-│   │   └── tests/            # Тести
-│   ├── users/                 # Додаток користувачів
-│   │   ├── models.py         # Модель User
-│   │   ├── serializers.py    # Серіалізатори (реєстрація, профіль)
-│   │   ├── views.py          # Автентифікація та профіль
-│   │   └── tests/            # Тести
-│   ├── requirements.txt       # Python залежності
+│   │   ├── services.py       # Business logic (AI generation)
+│   │   ├── urls.py           # URL routes
+│   │   └── tests/            # Tests
+│   ├── users/                 # Users app
+│   │   ├── models.py         # User model
+│   │   ├── serializers.py    # Serializers (registration, profile)
+│   │   ├── views.py          # Authentication and profile
+│   │   └── tests/            # Tests
+│   ├── requirements.txt       # Python dependencies
 │   └── manage.py             # Django CLI
 │
 ├── frontend/                  # React frontend
 │   ├── src/
-│   │   ├── api/              # API клієнт (axios)
-│   │   ├── components/       # Переиспользуемые компоненты
+│   │   ├── api/              # API client (axios)
+│   │   ├── components/       # Reusable components
 │   │   ├── context/          # React Context (AuthContext)
-│   │   ├── pages/            # Сторінки додатку
-│   │   ├── App.jsx           # Головний компонент
-│   │   └── index.jsx         # Входова точка
-│   ├── package.json          # npm залежності
-│   └── vite.config.js        # Vite конфігурація
+│   │   ├── pages/            # Application pages
+│   │   ├── App.jsx           # Main component
+│   │   └── index.jsx         # Entry point
+│   ├── package.json          # npm dependencies
+│   └── vite.config.js        # Vite configuration
 │
 ├── LICENSE
-└── README.md                  # Цей файл
+└── README.md                  # This file
 ```
 
-### Потік даних
+### Data Flow
 
 ```
 User → React Frontend → Axios → Django REST API → PostgreSQL
@@ -182,112 +182,112 @@ User → React Frontend → Axios → Django REST API → PostgreSQL
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
-### **Authentication & Users** (`/api/v1/auth/`)
+### Authentication & Users (`/api/v1/auth/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| POST | `/register/` | Реєстрація нового користувача | ❌ |
-| POST | `/login/` | Вхід (отримання JWT токенів) | ❌ |
-| POST | `/logout/` | Вихід з системи | ✅ |
-| GET/PUT/PATCH | `/profile/` | Перегляд/оновлення профілю | ✅ |
-| POST | `/change_password/` | Зміна паролю | ✅ |
-| POST | `/token/refresh/` | Оновлення access токену | ❌ |
+| POST | `/register/` | Register new user | No |
+| POST | `/login/` | Login (get JWT tokens) | No |
+| POST | `/logout/` | Logout | Yes |
+| GET/PUT/PATCH | `/profile/` | View/update profile | Yes |
+| POST | `/change_password/` | Change password | Yes |
+| POST | `/token/refresh/` | Refresh access token | No |
 
-### **Learning Plans** (`/api/v1/learning/`)
+### Learning Plans (`/api/v1/learning/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| POST | `/plans/generate/` | Генерація навчального плану через AI | ✅ |
-| GET | `/plans/` | Список усіх планів користувача | ✅ |
-| GET | `/plans/<id>/lessons/` | Список уроків конкретного плану | ✅ |
+| POST | `/plans/generate/` | Generate learning plan via AI | Yes |
+| GET | `/plans/` | List all user's plans | Yes |
+| GET | `/plans/<id>/lessons/` | List lessons for specific plan | Yes |
 
-### **Lessons** (`/api/v1/learning/`)
+### Lessons (`/api/v1/learning/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| GET | `/lessons/<id>/` | Детальна інформація про урок | ✅ |
-| POST | `/lessons/<id>/complete/` | Позначити урок як виконаний | ✅ |
+| GET | `/lessons/<id>/` | Detailed lesson information | Yes |
+| POST | `/lessons/<id>/complete/` | Mark lesson as completed | Yes |
 
-### **Quiz System** (`/api/v1/learning/`)
+### Quiz System (`/api/v1/learning/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| POST | `/lessons/<id>/quiz/generate/` | Генерація тесту для уроку через AI | ✅ |
-| GET | `/quiz/<id>/` | Отримання питань тесту | ✅ |
-| POST | `/quiz/<id>/submit/` | Відправка відповідей та отримання результату | ✅ |
+| POST | `/lessons/<id>/quiz/generate/` | Generate quiz for lesson via AI | Yes |
+| GET | `/quiz/<id>/` | Get quiz questions | Yes |
+| POST | `/quiz/<id>/submit/` | Submit answers and get results | Yes |
 
-### **Notes System** (`/api/v1/learning/`)
+### Notes System (`/api/v1/learning/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| GET/POST | `/lessons/<id>/notes/` | Список/створення конспектів для уроку | ✅ |
-| GET/PUT/DELETE | `/notes/<id>/` | Перегляд/редагування/видалення конспекту | ✅ |
+| GET/POST | `/lessons/<id>/notes/` | List/create notes for lesson | Yes |
+| GET/PUT/DELETE | `/notes/<id>/` | View/edit/delete note | Yes |
 
-### **Analytics & Progress** (`/api/v1/learning/`)
+### Analytics & Progress (`/api/v1/learning/`)
 
-| Method | Endpoint | Опис | Auth |
+| Method | Endpoint | Description | Auth |
 |--------|----------|------|------|
-| GET | `/analytics/` | Детальна аналітика прогресу користувача | ✅ |
-| GET | `/streak/` | Інформація про стріки та heatmap активності | ✅ |
+| GET | `/analytics/` | Detailed user progress analytics | Yes |
+| GET | `/streak/` | Study streak and activity heatmap info | Yes |
 
-### **API Documentation**
+### API Documentation
 
-| Endpoint | Опис |
+| Endpoint | Description |
 |----------|------|
-| `/api/schema/` | OpenAPI схема (JSON) |
-| `/api/docs/` | Swagger UI інтерфейс |
-| `/api/redoc/` | ReDoc інтерфейс |
+| `/api/schema/` | OpenAPI schema (JSON) |
+| `/api/docs/` | Swagger UI interface |
+| `/api/redoc/` | ReDoc interface |
 
 ---
 
-## 📊 Моделі даних
+## Data Models
 
-### **User** (користувачі)
+### User
 ```python
-- email (unique, використовується для входу)
+- email (unique, used for login)
 - username
 - first_name, last_name
 - avatar (ImageField)
-- bio (текстове поле)
+- bio (text field)
 - social_media
 - created_at, updated_at
 - is_active
 ```
 
-### **LearningPlan** (навчальні плани)
+### LearningPlan
 ```python
 - user (ForeignKey → User)
-- topic (тема навчання)
-- time_commitment_per_week (години на тиждень)
+- topic (learning topic)
+- time_commitment_per_week (hours per week)
 - knowledge_level (beginner/intermediate/experienced)
-- progress (відсоток виконання, 0-100)
+- progress (completion percentage, 0-100)
 - created_at
 ```
 
-### **Lesson** (уроки)
+### Lesson
 ```python
 - plan (ForeignKey → LearningPlan)
 - title
-- theory_md (теорія в Markdown)
-- task (практичне завдання)
+- theory_md (theory in Markdown)
+- task (practical assignment)
 - lesson_type (theory/practice/quiz/project)
-- time_estimate (хвилини)
-- day_number (номер дня)
-- extra_links (JSONField, додаткові ресурси)
+- time_estimate (minutes)
+- day_number (day number)
+- extra_links (JSONField, additional resources)
 ```
 
-### **UserProgress** (прогрес користувача)
+### UserProgress
 ```python
 - user (ForeignKey → User)
 - lesson (ForeignKey → Lesson)
-- is_completed (виконано чи ні)
-- completed_at (дата завершення)
-- time_spent (витрачений час у хвилинах)
+- is_completed (completed or not)
+- completed_at (completion date)
+- time_spent (time spent in minutes)
 ```
 
-### **Quiz** (тести)
+### Quiz
 ```python
 - lesson (ForeignKey → Lesson)
 - title
@@ -295,75 +295,75 @@ User → React Frontend → Axios → Django REST API → PostgreSQL
 - questions (related QuizQuestion)
 ```
 
-### **QuizQuestion** (питання тесту)
+### QuizQuestion
 ```python
 - quiz (ForeignKey → Quiz)
 - question_text
 - option_a, option_b, option_c, option_d
 - correct_answer (A/B/C/D)
-- explanation (пояснення правильної відповіді)
+- explanation (explanation of correct answer)
 ```
 
-### **QuizAttempt** (спроби проходження тесту)
+### QuizAttempt
 ```python
 - user (ForeignKey → User)
 - quiz (ForeignKey → Quiz)
-- score (бал у відсотках)
-- answers (JSONField, відповіді користувача)
+- score (score in percentage)
+- answers (JSONField, user answers)
 - completed_at
 ```
 
-### **LessonNote** (конспекти)
+### LessonNote
 ```python
 - user (ForeignKey → User)
 - lesson (ForeignKey → Lesson)
-- content (текст конспекту)
+- content (note text)
 - created_at, updated_at
 ```
 
-### **StudyStreak** (стріки навчання)
+### StudyStreak
 ```python
 - user (ForeignKey → User)
-- date (дата активності)
-- lessons_completed (кількість завершених уроків)
-- quizzes_taken (кількість пройдених тестів)
-- notes_created (кількість створених конспектів)
-- total_time_spent (загальний час у хвилинах)
-- activity_score (розрахунковий бал активності)
+- date (activity date)
+- lessons_completed (number of completed lessons)
+- quizzes_taken (number of quizzes taken)
+- notes_created (number of notes created)
+- total_time_spent (total time in minutes)
+- activity_score (calculated activity score)
 ```
 
 ---
 
-## 🛠️ Встановлення та налаштування
+## Installation and Setup
 
-### Передумови
+### Prerequisites
 - Python 3.10+
 - Node.js 18+
 - PostgreSQL 14+
-- OpenAI API ключ
+- OpenAI API key
 
 ### Backend Setup
 
-1. **Клонування репозиторію**
+1. **Clone repository**
 ```bash
 git clone https://github.com/salonaut/learn_platform_ai.git
 cd learn_platform_ai/backend
 ```
 
-2. **Створення віртуального середовища**
+2. **Create virtual environment**
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 ```
 
-3. **Встановлення залежностей**
+3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Налаштування змінних оточення**
-Створіть файл `.env` у папці `backend/`:
+4. **Configure environment variables**
+Create `.env` file in `backend/` folder:
 ```env
 SECRET_KEY=your-django-secret-key
 DEBUG=True
@@ -376,58 +376,58 @@ DB_HOST=localhost
 DB_PORT=5432
 ```
 
-5. **Міграції бази даних**
+5. **Database migrations**
 ```bash
 python manage.py migrate
 ```
 
-6. **Створення суперкористувача**
+6. **Create superuser**
 ```bash
 python manage.py createsuperuser
 ```
 
-7. **Запуск сервера**
+7. **Run server**
 ```bash
 python manage.py runserver
 ```
-Backend буде доступний за адресою: `http://localhost:8000`
+Backend will be available at: `http://localhost:8000`
 
 ### Frontend Setup
 
-1. **Перехід до папки frontend**
+1. **Navigate to frontend folder**
 ```bash
 cd ../frontend
 ```
 
-2. **Встановлення залежностей**
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. **Запуск dev сервера**
+3. **Run dev server**
 ```bash
 npm run dev
 ```
-Frontend буде доступний за адресою: `http://localhost:3000`
+Frontend will be available at: `http://localhost:3000`
 
 ---
 
-## 📚 Документація
+## Documentation
 
-Цей проєкт використовує автоматичну генерацію документації для backend та frontend коду:
+This project uses automated documentation generation for backend and frontend code:
 
 ### Backend Documentation (Python)
-- **Tool**: Doxygen з підтримкою Python
-- **Format**: Doxygen-style коментарі з тегами `@brief`, `@param`, `@return`, `@throws`, `@example`
-- **Coverage**: Models, views, serializers та services
+- **Tool**: Doxygen with Python support
+- **Format**: Doxygen-style comments with `@brief`, `@param`, `@return`, `@throws`, `@example` tags
+- **Coverage**: Models, views, serializers, and services
 
 ### Frontend Documentation (JavaScript)
 - **Tool**: JSDoc
-- **Format**: JSDoc коментарі зі стандартними тегами
-- **Coverage**: React компоненти, context providers, API клієнти
+- **Format**: JSDoc comments with standard tags
+- **Coverage**: React components, context providers, API clients
 
-### Перегляд документації
-Документація автоматично генерується та публікується на GitHub Pages при кожному push до main гілки.
+### Viewing Documentation
+Documentation is automatically generated and published to GitHub Pages on every push to the main branch.
 
 **Live Documentation**: https://salonaut.github.io/learn_platform_ai/
 
@@ -449,9 +449,9 @@ npm run docs
 
 ---
 
-## 🎯 Приклади використання
+## Usage Examples
 
-### Генерація навчального плану
+### Generate Learning Plan
 
 **Request:**
 ```bash
@@ -490,7 +490,7 @@ Authorization: Bearer <access_token>
 }
 ```
 
-### Позначення уроку як виконаного
+### Mark Lesson as Completed
 
 **Request:**
 ```bash
@@ -517,7 +517,7 @@ Authorization: Bearer <access_token>
 }
 ```
 
-### Генерація та проходження тесту
+### Generate and Take Quiz
 
 **Generate Quiz:**
 ```bash
@@ -561,14 +561,14 @@ Authorization: Bearer <access_token>
 
 ---
 
-## 🔐 Налаштування безпеки
+## Security Configuration
 
 ### JWT Authentication
-Система використовує JWT токени для автентифікації:
-- **Access Token**: дійсний 60 хвилин
-- **Refresh Token**: дійсний 7 днів
-- Автоматична ротація refresh токенів
-- Blacklist для протермінованих токенів
+The system uses JWT tokens for authentication:
+- **Access Token**: valid for 60 minutes
+- **Refresh Token**: valid for 7 days
+- Automatic refresh token rotation
+- Blacklist for expired tokens
 
 ### CORS Configuration
 ```python
@@ -579,121 +579,119 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 ```
 
-### Рекомендації для production:
-1. Змінити `DEBUG=False`
-2. Встановити правильний `SECRET_KEY`
-3. Налаштувати `ALLOWED_HOSTS`
-4. Використовувати HTTPS
-5. Налаштувати rate limiting
-6. Використовувати окремі змінні оточення для різних середовищ
+### Production Recommendations:
+1. Set `DEBUG=False`
+2. Configure proper `SECRET_KEY`
+3. Set up `ALLOWED_HOSTS`
+4. Use HTTPS
+5. Configure rate limiting
+6. Use separate environment variables for different environments
 
 ---
 
-## 🧪 Тестування
+## Testing
 
-Проєкт містить комплексні тести для backend:
+The project includes comprehensive backend tests:
 
 ```bash
 cd backend
 python manage.py test
 ```
 
-### Покриття тестами:
+### Test Coverage:
 - **users app**: models, serializers, views, permissions
 - **learning_plan app**: models, serializers, views, services, utils
-- Factory patterns для створення тестових даних
-- Тести permissions та автентифікації
+- Factory patterns for creating test data
+- Permission and authentication tests
 
-Тестова документація: [backend/learning_plan/tests/QUICK_REFERENCE.md](backend/learning_plan/tests/QUICK_REFERENCE.md)
+Test documentation: [backend/learning_plan/tests/QUICK_REFERENCE.md](backend/learning_plan/tests/QUICK_REFERENCE.md)
 
 ---
 
-## 📦 Deployment
+## Deployment
 
 ### Backend (Django)
-Рекомендовані платформи:
-- **Heroku** з PostgreSQL addon
+Recommended platforms:
+- **Heroku** with PostgreSQL addon
 - **DigitalOcean App Platform**
 - **Railway**
-- **AWS EC2** з RDS PostgreSQL
+- **AWS EC2** with RDS PostgreSQL
 
-Додаткові налаштування:
+Additional configuration:
 ```bash
-# Збір статичних файлів
+# Collect static files
 python manage.py collectstatic
 
-# Gunicorn для production
+# Gunicorn for production
 pip install gunicorn
 gunicorn config.wsgi:application
 ```
 
 ### Frontend (React)
-Рекомендовані платформи:
+Recommended platforms:
 - **Vercel**
 - **Netlify**
 - **GitHub Pages**
 
-Build команда:
+Build command:
 ```bash
 npm run build
 ```
 
 ---
 
-## 🤝 Внесок у проєкт
+## Contributing
 
-Contributions welcome! Для внеску:
+Contributions welcome! To contribute:
 
-1. Fork репозиторій
-2. Створіть feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit зміни (`git commit -m 'Add some AmazingFeature'`)
-4. Push до branch (`git push origin feature/AmazingFeature`)
-5. Відкрийте Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ### Coding Standards
-- Дотримуйтесь PEP 8 для Python коду
-- Використовуйте ESLint для JavaScript коду
-- Додавайте docstrings та JSDoc коментарі
-- Пишіть тести для нових функцій
+- Follow PEP 8 for Python code
+- Use ESLint for JavaScript code
+- Add docstrings and JSDoc comments
+- Write tests for new features
 
 ---
 
-## 📝 Ліцензія
+## License
 
-Цей проєкт ліцензовано під MIT License - деталі в файлі [LICENSE](LICENSE).
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👤 Автор
+## Author
 
 **GitHub**: [@salonaut](https://github.com/salonaut)
 
-**Документація**: [https://salonaut.github.io/learn_platform_ai/](https://salonaut.github.io/learn_platform_ai/)
+**Documentation**: [https://salonaut.github.io/learn_platform_ai/](https://salonaut.github.io/learn_platform_ai/)
 
 ---
 
-## 🙏 Подяки
+## Acknowledgments
 
-- [OpenAI](https://openai.com/) за GPT API
+- [OpenAI](https://openai.com/) for GPT API
 - [Django REST Framework](https://www.django-rest-framework.org/)
 - [React](https://react.dev/)
 - [Material-UI](https://mui.com/)
-- Всім контриб'юторам проєкту
+- All project contributors
 
 ---
 
-## 📮 Контакти та підтримка
+## Contact and Support
 
-Якщо у вас є питання або пропозиції:
-- 📧 Створіть [Issue](https://github.com/salonaut/learn_platform_ai/issues)
-- 💬 Відкрийте [Discussion](https://github.com/salonaut/learn_platform_ai/discussions)
+If you have questions or suggestions:
+- Create an [Issue](https://github.com/salonaut/learn_platform_ai/issues)
+- Start a [Discussion](https://github.com/salonaut/learn_platform_ai/discussions)
 
 ---
 
 <div align="center">
-  
-**Made with ❤️ and AI**
 
-⭐ Поставте зірку, якщо проєкт був корисним!
+Made with AI
 
 </div>
